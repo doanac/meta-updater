@@ -16,11 +16,17 @@ do_install() {
         install -m 0700 -d ${D}${localstatedir}/sota
         cp "${SOTA_PACKED_CREDENTIALS}" ${D}${localstatedir}/sota/sota_provisioning_credentials.zip
         # Device should not be able to push data to treehub
-        zip -d ${D}${localstatedir}/sota/sota_provisioning_credentials.zip treehub.json
+        if unzip -l ${D}${localstatedir}/sota/sota_provisioning_credentials.zip treehub.json > /dev/null; then
+            zip -d ${D}${localstatedir}/sota/sota_provisioning_credentials.zip treehub.json
+        fi
         # Device has no use for the API Gateway. Remove if present. See:
         # https://github.com/advancedtelematic/ota-plus-server/pull/1913/
         if unzip -l ${D}${localstatedir}/sota/sota_provisioning_credentials.zip api_gateway.url > /dev/null; then
             zip -d ${D}${localstatedir}/sota/sota_provisioning_credentials.zip api_gateway.url 
+        fi
+        # Device does not need API Gateway TLS credentials.
+        if unzip -l ${D}${localstatedir}/sota/sota_provisioning_credentials.zip client_auth.p12 > /dev/null; then
+            zip -d ${D}${localstatedir}/sota/sota_provisioning_credentials.zip client_auth.p12
         fi
     fi
 }
