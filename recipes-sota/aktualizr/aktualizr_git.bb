@@ -15,7 +15,7 @@ RDEPENDS_${PN}-ptest += "bash cmake curl python3-misc python3-modules openssl-bi
 PV = "1.0+git${SRCPV}"
 PR = "7"
 
-GARAGE_SIGN_PV = "0.7.0-3-gf5ba640"
+GARAGE_SIGN_PV = "0.7.0-7-g472e885"
 
 SRC_URI = " \
   gitsm://github.com/advancedtelematic/aktualizr;branch=${BRANCH} \
@@ -28,11 +28,11 @@ SRC_URI = " \
   "
 
 # for garage-sign archive
-SRC_URI[md5sum] = "e104ccd4f32e52571a5fc0e5042db050"
-SRC_URI[sha256sum] = "c590be1a57523bfe097af82279eda5c97cf40ae47fb27162cf33c469702c8a9b"
+SRC_URI[md5sum] = "daaf3d303e88c0850e0c2d04c3c31c2f"
+SRC_URI[sha256sum] = "ef4707e094be092dd7150b421c53f385c59847b64abfe8b2092dad85f4d69163"
 
-SRCREV = "fce5854ff10e7efd52d69bbaf68dc2af990d5746"
-BRANCH ?= "master"
+SRCREV = "b141cb18c18385cee669930342d99b30f9c1f679"
+BRANCH ?= "feat/OTA-2666/garage-tools-mutual-tls"
 
 S = "${WORKDIR}/git"
 
