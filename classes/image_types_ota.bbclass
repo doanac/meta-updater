@@ -90,6 +90,12 @@ IMAGE_CMD_ota () {
 	fi
 	mkdir -p ${OTA_SYSROOT}/ostree/deploy/${OSTREE_OSNAME}/var/sota/import
 	echo "{\"${ostree_target_hash}\":\"${GARAGE_TARGET_NAME}-${target_version}\"}" > ${OTA_SYSROOT}/ostree/deploy/${OSTREE_OSNAME}/var/sota/import/installed_versions
+        if [ -n "${GARAGE_CUSTOMIZE_TARGET}" ]; then
+		bbplain "Running command(${GARAGE_CUSTOMIZE_TARGET}) to customize target"
+		${GARAGE_CUSTOMIZE_TARGET} \
+			${OTA_SYSROOT}/ostree/deploy/${OSTREE_OSNAME}/var/sota/import/installed_versions \
+			${GARAGE_TARGET_NAME}-${target_version}
+        fi
 }
 
 IMAGE_TYPEDEP_ota-ext4 = "ota"
